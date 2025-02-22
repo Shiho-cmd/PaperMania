@@ -77,7 +77,7 @@ function onCreate()
     precacheSound("toby_bark")
     precacheSound("yeahresident")
 
-    debugPrint('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress F1 for help!', 'FFA500')
+    debugPrint(getTranslationPhrase('helpTextSplash', '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress F1 for help!'), 'FFA500')
 
     playSound("yeahresident", 0.5, 'bgm', true)
 	
@@ -103,7 +103,7 @@ function onCreate()
     setTextAlignment("bucetas", 'left')
     addLuaText("bucetas")
 
-    makeLuaText("penis", "Movement: "..string.upper(tostring(leftKey.keyboard))..', '..string.upper(tostring(rightKey.keyboard))..'\n\nRun: '..string.upper(tostring(runKey.keyboard))..'\n\nInteract: '..string.upper(tostring(acceptKey.keyboard)), 0, 0.0, 0.0)
+    makeLuaText("penis", getTranslationPhrase('helpText', 'Movement: {1}, {2}\n\nRun: {3}\n\nInteract: {4}', {string.upper(tostring(leftKey.keyboard)), string.upper(tostring(rightKey.keyboard)), string.upper(tostring(runKey.keyboard)), string.upper(tostring(acceptKey.keyboard))}), 0, 0.0, 0.0)
     setObjectCamera("penis", 'other')
     setTextSize("penis", 40)
     setTextAlignment("penis", 'center')

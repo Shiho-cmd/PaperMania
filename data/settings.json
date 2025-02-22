@@ -1,0 +1,76 @@
+[
+	// All types:
+	// bool - Has a checkbox only, meaning it can only be 'true' or 'false'.
+	// int - Numbers with no decimals (ex. 1, 3, 9, -1)
+	// float - Similar to int, but numbers can have decimals (ex. 1.5, 2.75)
+	// percent - Similar to float, but the displayed value is multiplied by 100 (ex. 1.1 will be displayed as "110%")
+	// string - A text instead of numbers/false and true, you gotta set up "options" variable to it
+	// key - TO BE IMPLEMENTED
+	{
+		"save": "debug",
+		"name": "Lua Debug Mode", //Name shown on the mod settings menu
+		"type": "bool",
+		"description": "mostra erros em lua scripts na tela do jogo caso não apareça pop-ups", //Description shown on the mod settings menu
+		"value": true //This is the default value
+	},
+	{
+		"save": "deprecated",
+		"name": "Lua Depracated Warnings", //Name shown on the mod settings menu
+		"type": "bool",
+		"description": "avisa caso exista alguma função nos scripts que são obsoletas e podem ser trocadas por alguma função melhor", //Description shown on the mod settings menu
+		"value": true //This is the default value
+	},
+	{
+		"save": "butt",
+		"name": "Butões de debug", //Name shown on the mod settings menu
+		"type": "bool",
+		"description": "algumas funções iradas aí pra usar durante a música (todos eles são listados no começo da música caso queria ver de novo apenas aperte ESPAÇO e as instruções aparecem de novo)", //Description shown on the mod settings menu
+		"value": true //This is the default value
+	},
+	{
+		"save": "info",
+		"name": "Informações de nerd", //Name shown on the mod settings menu
+		"type": "bool",
+		"description": "mostra coisas na hud do jogo como o step atual ou a batida coisas assim", //Description shown on the mod settings menu
+		"value": false //This is the default value
+	},
+	{
+		"save": "livre",
+		"name": "Câmera Livre", //Name shown on the mod settings menu
+		"type": "bool",
+		"description": "permite que você movimente a câmera do jogo livremente por aí com W, A, S, D e dê zoom in e zoom out com I e O (os butões de debug precisam estar ativados pra isso funcionar)", //Description shown on the mod settings menu
+		"value": false //This is the default value
+	},
+	{
+		"save": "keyLeft",
+		"name": "Left Key:",
+		"description": "Used for movement on overworld.",
+		"type": "keybind",
+		"keyboard": "A",
+		"gamepad": "DPAD_LEFT"
+	},
+	{
+		"save": "keyRight",
+		"name": "Right Key:",
+		"description": "Used for movement on overworld.",
+		"type": "keybind",
+		"keyboard": "D",
+		"gamepad": "DPAD_RIGHT"
+	},
+	{
+		"save": "keyAccept",
+		"name": "Confirm Key:",
+		"description": "Used to confirm/interact on overworld.",
+		"type": "keybind",
+		"keyboard": "E",
+		"gamepad": "A"
+	},
+	{
+		"save": "keyRun",
+		"name": "Run Key:",
+		"description": "Used to run/cancel on overworld.",
+		"type": "keybind",
+		"keyboard": "SHIFT",
+		"gamepad": "B"
+	}
+]

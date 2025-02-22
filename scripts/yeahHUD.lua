@@ -1,4 +1,3 @@
---teste
 local bfRGBNr = { 'C24B99', '00FFFF', '12FA05', 'F9393F' }
 local bfRGBNg = { 'FFFFFF', 'FFFFFF', 'FFFFFF', 'FFFFFF' }
 local bfRGBNb = { '3C1F56', '1542B7', '0A4447', '651038' }

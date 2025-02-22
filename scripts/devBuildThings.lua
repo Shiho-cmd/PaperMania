@@ -16,8 +16,6 @@ function onCreate()
         makeLuaText("debug", "", 0, 0.0, 15)
         setTextSize("debug", 20)
         addLuaText("debug")
-    elseif not isRunning("mods/PaperMania/scripts/disabled/callbacks.lua") and getModSetting("butt") then
-        addLuaScript("scripts/disabled/callbacks")
     end
 end
 

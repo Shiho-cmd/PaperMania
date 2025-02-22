@@ -1,7 +1,33 @@
 luaDebugMode = true
 
+local inte
+
 function parseJson(file)
     return callMethodFromClass('tjson.TJSON', 'parse', {getTextFromFile(file)})
+end
+
+function createNPC(tag, path, x, y, scaleX, scaleY, interactable, animated, front, updateHB)
+
+    if not animated then
+        makeLuaSprite(tag, path, x, y)
+        scaleObject(tag, scaleX, scaleY, updateHB)
+        addLuaSprite(tag, front)
+        inte = tostring(interactable)..tag
+    else
+        makeAnimatedLuaSprite(tag, path, x, y)
+        scaleObject(tag, scaleX, scaleY, updateHB)
+        addLuaSprite(tag, front)
+        inte = tostring(interactable)..tag
+    end
+end
+
+function npcInteract(tag)
+
+    if inte == 'true'..tag then
+        return true;
+    else
+        return false;
+    end
 end
 
 local leftKey = getModSetting('keyLeft')
@@ -13,6 +39,9 @@ local clicavel = false
 
 local pintoes = parseJson('data/recepcao/dicks.json')
 local bucetoes = parseJson('data/recepcao/pussy.json')
+local saveShit = parseJson('data/saveData-'..difficultyName..'.json')
+
+local room = 'recepcao'
 
 local enableCam = false
 local camX = 1
@@ -27,34 +56,44 @@ local bct = 1
 local quanto = 1
 local ativado = false
 local curTag = 1
-local tags = {'bg', 'elevador'}
-local maxTagNum = 2
+local tags = {'bg', 'elevador', 'tober'}
+local maxTagNum = 3
+
+local help = 1
 
 function onStartCountdown()
     
     setProperty("dadGroup.visible", false)
     setProperty("botplayTxt.visible", false)
-    triggerEvent("Camera Follow Pos", pintoes.camera_offset[1], pintoes.camera_offset[2])
+    triggerEvent("Camera Follow Pos", saveShit.startCam[1], saveShit.startCam[2])
     return Function_Stop;
 end
 
 function onCreate()
 
-    if not isRunning("mods/PaperMania/scripts/disabled/callbacks.lua") then
-        addLuaScript("scripts/disabled/callbacks")
-    end
+    precacheImage("bg/recepcao/toby")
+    precacheImage("bg/recepcao/elevador")
+    precacheImage("bg/recepcao/recepbg")
+    precacheSound("toby_bark")
+    precacheSound("yeahresident")
 
-    playMusic("yeahresident", 0, true)
+    debugPrint('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress F1 for help!', 'FFA500')
+
+    playSound("yeahresident", 0.5, 'bgm', true)
 	
-    setCharacterX("boyfriend", pintoes.spawn[1])
-    setCharacterY("boyfriend", pintoes.spawn[2])
+    setCharacterX("boyfriend", saveShit.playerSpawn[1])
+    setCharacterY("boyfriend", saveShit.playerSpawn[2])
 
     makeLuaSprite("bg", 'bg/recepcao/recepbg', bucetoes.bg[1], bucetoes.bg[2])
-    scaleObject("bg", 1.95, 1.95)
+    scaleObject("bg", 1.8, 1.8)
     addLuaSprite("bg", false)
 
+    -- tag, path, x, y, scaleX, scaleY, interactable, animated, front, updateHB
+    createNPC('tober', 'bg/recepcao/toby', bucetoes.tober[1], bucetoes.tober[2], 0.5, 0.5, true, true, false, true)
+    addAnimationByPrefix("tober", "idle", "idle", 6, true)
+
     makeAnimatedLuaSprite("elevador", 'bg/recepcao/elevador', bucetoes.eleva[1], bucetoes.eleva[2])
-    addAnimationByPrefix("elevador", "idle", "loop", 5, true)
+    addAnimationByPrefix("elevador", "idle", "loop", 6, true)
     scaleObject("elevador", 3, 3)
     addLuaSprite("elevador", false)
 
@@ -63,10 +102,41 @@ function onCreate()
     setTextSize("bucetas", 20)
     setTextAlignment("bucetas", 'left')
     addLuaText("bucetas")
+
+    makeLuaText("penis", "Movement: "..string.upper(tostring(leftKey.keyboard))..', '..string.upper(tostring(rightKey.keyboard))..'\n\nRun: '..string.upper(tostring(runKey.keyboard))..'\n\nInteract: '..string.upper(tostring(acceptKey.keyboard)), 0, 0.0, 0.0)
+    setObjectCamera("penis", 'other')
+    setTextSize("penis", 40)
+    setTextAlignment("penis", 'center')
+    screenCenter("penis")
+    setProperty("penis.alpha", 0.00001)
+    addLuaText("penis")
+
+    makeLuaSprite("back")
+    makeGraphic("back", screenWidth, screenHeight, '000000')
+    setObjectCamera("back", 'other')
+    setProperty("back.alpha", 0.00001)
+    addLuaSprite("back", false)
+
     runTimer("ajeitar", 0.2)
 end
 
 function onUpdate(elapsed)
+
+    if keyboardJustPressed("F1") then
+        help = help + 1
+    end
+
+    if help > 2 then
+        help = 1
+    end
+
+    if help == 2 then
+        doTweenAlpha("pinto", "penis", 1, 0.3, "linear")
+        doTweenAlpha("bucetudo", "back", 0.5, 0.3, "linear")
+    elseif help == 1 then
+        doTweenAlpha("pinto", "penis", 0.00001, 0.1, "linear")
+        doTweenAlpha("bucetudo", "back", 0.00001, 0.1, "linear")
+    end
 
     if keyboardPressed(runKey.keyboard) or anyGamepadPressed(runKey.gamepad) then
         velo = 12
@@ -78,13 +148,13 @@ function onUpdate(elapsed)
         moveAnim = 'walk'
     end
 
-    if getProperty("boyfriend.x") <= 530 then
+    if getProperty("boyfriend.x") <= 524 then
         enableCam = false
-        camX = 908.5
+        camX = 902.5
         camY = 698.82
-    elseif getProperty("boyfriend.x") >= 3812 then
+    elseif getProperty("boyfriend.x") >= 3362 then
         enableCam = false
-        camX = 4190.5
+        camX = 3740.5
         camY = 698.82
     else
         enableCam = true
@@ -95,12 +165,25 @@ function onUpdate(elapsed)
     if getProperty("boyfriend.x") <= -508 then
         stopMove('boyfriend', 'idle')
         moveLeft = false
-    elseif getProperty("boyfriend.x") >= 4946 then
+    elseif getProperty("boyfriend.x") >= 4034 then
         stopMove('boyfriend', 'idle')
         moveRight = false
     else
         moveLeft = true
         moveRight = true
+    end
+
+    if getProperty("boyfriend.x") >= 4034 then
+        keyShit('in')
+
+        if keyboardJustPressed(acceptKey.keyboard) and npcInteract('tober') then    
+            playSound("toby_bark", 1, 'bark')
+            setSoundPitch('bark', getRandomFloat(1.3, 0.7))
+        end
+    elseif getProperty("boyfriend.x") >= 1784 and getProperty("boyfriend.x") < 2535 then
+        keyShit('in')
+    else
+        keyShit('out')
     end
 
     if keyboardPressed(rightKey.keyboard) and moveRight or anyGamepadPressed(rightKey.gamepad) and moveRight then
@@ -119,13 +202,8 @@ function onUpdate(elapsed)
     end
 
     if keyJustPressed('back') then
+        saveFile("mods/PaperMania/data/saveData-"..difficultyName..'.json', '{\n    "playerSpawn": ['..getProperty("boyfriend.x")..', '..getProperty("boyfriend.y")..'],\n    "curRoom": ["'..room..'"],\n    "startCam": ['..getCameraFollowX()..', '..getCameraFollowY()..']\n}', true)
         exitSong(false)
-    end
-
-    if getProperty("boyfriend.x") >= 4192 then
-        keyShit('in')
-    else
-        keyShit('out')
     end
 
     if keyboardJustPressed("Q") then
@@ -173,8 +251,8 @@ function onUpdate(elapsed)
         setProperty("bg.y", bucetoes.bg[2])
         setProperty("elevador.x", bucetoes.eleva[1])
         setProperty("elevador.y", bucetoes.eleva[2])
-    elseif keyboardPressed("CONTROL") and keyboardJustPressed("S") and ativado then
-        saveFile('mods/PaperMania/data/recepcao/pussy.json', '{\n    "bg": ['..getProperty("bg.x")..', '..getProperty("bg.y")..'],\n    "eleva": ['..getProperty("elevador.x")..', '..getProperty("elevador.y")..']\n}', true)
+    elseif keyboardPressed("CONTROL") and keyboardJustPressed("G") and ativado then
+        saveFile('mods/PaperMania/data/recepcao/pussy.json', '{\n    "bg": ['..getProperty("bg.x")..', '..getProperty("bg.y")..'],\n    "eleva": ['..getProperty("elevador.x")..', '..getProperty("elevador.y")..'],\n    "tober": ['..getProperty("tober.x")..', '..getProperty("tober.y")..']\n}', true)
         debugPrint('                                                               Arquivo salvo', '00ff00')
     end
 

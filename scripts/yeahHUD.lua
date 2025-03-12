@@ -8,12 +8,21 @@ local moveMiddle = {-90 - 0.5, -90, -90 + 0.5}
 
 local curArrow = 0
 
+local hide
+
 function onCreate()
+
+    if hideHud then
+        hide = false
+    else
+        hide = true
+    end
     
     makeLuaSprite("bar", 'ui/healthBarContainer', 0, 0)
     setObjectCamera("bar", 'hud')
-    scaleObject("bar", 0.5, 0.5)
-    --setProperty("bar.alpha", 0.5)
+    scaleObject("bar", 0.5, 0.5) 
+    setProperty("bar.alpha", healthBarAlpha)
+    setProperty("bar.visible", hide)
     addLuaSprite("bar", false)
 end
 

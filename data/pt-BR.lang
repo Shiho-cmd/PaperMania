@@ -1,0 +1,19 @@
+Português (Brasil)
+
+// Geral
+helpText: "Movimentação: {1}, {2}\n\nCorrer: {3}\n\nInteragir: {4}"
+helpTextSplash: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAperte F1 para receber ajuda!"
+
+
+// Configs
+setting_left_key: "Botão Esquerda:"
+description_left_key: "Usado para movimentação no mundo aberto."
+
+setting_right_key: "Botão Direita:"
+description_right_key: "Usado para movimentação no mundo aberto."
+
+setting_confirm_key: "Botão Confirmar:"
+description_confirm_key: "Usado para confirmar/interagir no mundo aberto."
+
+setting_run_key: "Botão Correr:"
+description_run_key: "Usado para correr/cancelar no mundo aberto."

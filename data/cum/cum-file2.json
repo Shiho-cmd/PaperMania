@@ -1,0 +1,29 @@
+{
+	"player1": "bf-recep",
+	"player2": "bf-pixel-opponent",
+	"notes": [
+		{
+			"sectionNotes": [
+				[0, 4, 0]
+			],
+			"sectionBeats": 4,
+			"mustHitSection": false
+		},
+		{
+			"sectionNotes": [],
+			"sectionBeats": 4,
+			"mustHitSection": false
+		}
+	],
+	"gfVersion": "gf",
+	"events": [],
+	"disableNoteRGB": false,
+	"splashSkin": "noteSplashes/noteSplashes-yeahsplashes",
+	"song": "cum",
+	"arrowSkin": "noteSkins/NOTE_assets-yeaharrows",
+	"stage": "recepcao",
+	"needsVoices": true,
+	"format": "psych_v1_convert",
+	"speed": 1.6,
+	"bpm": 150
+}

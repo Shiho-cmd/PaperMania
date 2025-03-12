@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 DEV https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="transition.png" width="1282" height="7188" spritePadding="3" borderPadding="1">
+	<SubTexture name="Close0000" x="1" y="3616" width="1230" height="720" frameX="0" frameY="0" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0001" x="1" y="4339" width="1194" height="720" frameX="-18" frameY="0" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0002" x="1" y="5062" width="892" height="719" frameX="-169" frameY="-1" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0003" x="1" y="5784" width="890" height="544" frameX="-170" frameY="-88" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0004" x="1" y="6331" width="707" height="533" frameX="-262" frameY="-94" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0005" x="711" y="6331" width="412" height="488" frameX="-409" frameY="-116" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0006" x="1" y="6867" width="592" height="320" frameX="-319" frameY="-200" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0007" x="596" y="6867" width="248" height="278" frameX="-491" frameY="-221" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Close0008" x="847" y="6867" width="148" height="144" frameX="-541" frameY="-288" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Loop0000" x="1" y="1" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0001" x="1" y="1" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0002" x="1" y="724" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0003" x="1" y="724" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0004" x="1" y="1447" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0005" x="1" y="1447" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0006" x="1" y="2170" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0007" x="1" y="2170" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0008" x="1" y="2893" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Loop0009" x="1" y="2893" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="Open0000" x="847" y="6867" width="148" height="144" frameX="-541" frameY="-288" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0001" x="596" y="6867" width="248" height="278" frameX="-491" frameY="-221" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0002" x="1" y="6867" width="592" height="320" frameX="-319" frameY="-200" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0003" x="711" y="6331" width="412" height="488" frameX="-409" frameY="-116" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0004" x="1" y="6331" width="707" height="533" frameX="-262" frameY="-94" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0005" x="1" y="5784" width="890" height="544" frameX="-170" frameY="-88" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0006" x="1" y="5062" width="892" height="719" frameX="-169" frameY="-1" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0007" x="1" y="4339" width="1194" height="720" frameX="-18" frameY="0" frameWidth="1230" frameHeight="720"/>
+	<SubTexture name="Open0008" x="1" y="3616" width="1230" height="720" frameX="0" frameY="0" frameWidth="1230" frameHeight="720"/>
+</TextureAtlas>

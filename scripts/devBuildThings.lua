@@ -34,8 +34,6 @@ function onCountdownStarted()
 
     2 - esconde a hud
 
-    3 - abre o menu de opções
-
     4 - sai da música
 
     5 - liga/desliga o botplay
@@ -92,6 +90,7 @@ function onUpdate(elapsed)
     elseif keyboardJustPressed("TWO") and getModSetting("butt") then
         n = n + 1
     elseif keyboardJustPressed("F5") and getModSetting("butt") then
+        stopSound("bgm")
         restartSong(false)
     elseif keyboardJustPressed("THREE") and getModSetting("butt") then
         openOptions()
@@ -135,8 +134,6 @@ function onUpdate(elapsed)
     1 - mostra todos os scripts rodando
 
     2 - esconde a hud
-
-    3 - abre o menu de opções
 
     4 - sai da música
 

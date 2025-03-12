@@ -54,6 +54,7 @@ local moveRight = true
 
 local bct = 1
 local quanto = 1
+local quantoScale = 0.1
 local ativado = false
 local curTag = 1
 local tags = {'bg', 'elevador', 'tober'}
@@ -85,7 +86,7 @@ function onCreate()
     setCharacterY("boyfriend", saveShit.playerSpawn[2])
 
     makeLuaSprite("bg", 'bg/recepcao/recepbg', bucetoes.bg[1], bucetoes.bg[2])
-    scaleObject("bg", 1.8, 1.8)
+    scaleObject("bg", bucetoes.bg[3], bucetoes.bg[4])
     addLuaSprite("bg", false)
 
     -- tag, path, x, y, scaleX, scaleY, interactable, animated, front, updateHB
@@ -152,9 +153,9 @@ function onUpdate(elapsed)
         enableCam = false
         camX = 902.5
         camY = 698.82
-    elseif getProperty("boyfriend.x") >= 3362 then
+    elseif getProperty("boyfriend.x") >= 4358 then
         enableCam = false
-        camX = 3740.5
+        camX = 4736.5
         camY = 698.82
     else
         enableCam = true
@@ -165,7 +166,7 @@ function onUpdate(elapsed)
     if getProperty("boyfriend.x") <= -508 then
         stopMove('boyfriend', 'idle')
         moveLeft = false
-    elseif getProperty("boyfriend.x") >= 4034 then
+    elseif getProperty("boyfriend.x") >= 4940 then
         stopMove('boyfriend', 'idle')
         moveRight = false
     else
@@ -173,14 +174,14 @@ function onUpdate(elapsed)
         moveRight = true
     end
 
-    if getProperty("boyfriend.x") >= 4034 then
+    if getProperty("boyfriend.x") >= 4940 then
         keyShit('in')
 
         if keyboardJustPressed(acceptKey.keyboard) and npcInteract('tober') then    
             playSound("toby_bark", 1, 'bark')
             setSoundPitch('bark', getRandomFloat(1.3, 0.7))
         end
-    elseif getProperty("boyfriend.x") >= 1784 and getProperty("boyfriend.x") < 2535 then
+    elseif getProperty("boyfriend.x") >= 2066 and getProperty("boyfriend.x") < 2768 then
         keyShit('in')
     else
         keyShit('out')
@@ -202,8 +203,9 @@ function onUpdate(elapsed)
     end
 
     if keyJustPressed('back') then
-        saveFile("mods/PaperMania/data/saveData-"..difficultyName..'.json', '{\n    "playerSpawn": ['..getProperty("boyfriend.x")..', '..getProperty("boyfriend.y")..'],\n    "curRoom": ["'..room..'"],\n    "startCam": ['..getCameraFollowX()..', '..getCameraFollowY()..']\n}', true)
+        --saveFile("mods/PaperMania/data/saveData-"..difficultyName..'.json', '{\n    "playerSpawn": ['..getProperty("boyfriend.x")..', '..getProperty("boyfriend.y")..'],\n    "curRoom": ["'..room..'"],\n    "startCam": ['..getCameraFollowX()..', '..getCameraFollowY()..']\n}', true)
         exitSong(false)
+        stopSound("bgm")
     end
 
     if keyboardJustPressed("Q") then
@@ -246,24 +248,38 @@ function onUpdate(elapsed)
     elseif keyboardPressed("K") and keyboardPressed("ALT") and ativado then
         setProperty(tags[curTag]..".y", getProperty(tags[curTag]..".y") + quanto)
 
+    elseif keyboardJustPressed("PLUS") and ativado then
+        setProperty(tags[curTag]..".scale.x", getProperty(tags[curTag]..".scale.x") + quantoScale)
+        setProperty(tags[curTag]..".scale.y", getProperty(tags[curTag]..".scale.y") + quantoScale)
+        updateHitbox(tags[curTag])
+    elseif keyboardJustPressed("MINUS") and ativado then
+        setProperty(tags[curTag]..".scale.x", getProperty(tags[curTag]..".scale.x") - quantoScale)
+        setProperty(tags[curTag]..".scale.y", getProperty(tags[curTag]..".scale.y") - quantoScale)
+        updateHitbox(tags[curTag])
+
     elseif keyboardJustPressed("R") and ativado then
         setProperty("bg.x", bucetoes.bg[1])
         setProperty("bg.y", bucetoes.bg[2])
+        scaleObject("bg", bucetoes.bg[3], bucetoes.bg[4])
         setProperty("elevador.x", bucetoes.eleva[1])
         setProperty("elevador.y", bucetoes.eleva[2])
+        setProperty("tober.x", bucetoes.tober[1])
+        setProperty("tober.y", bucetoes.tober[2])
     elseif keyboardPressed("CONTROL") and keyboardJustPressed("G") and ativado then
-        saveFile('mods/PaperMania/data/recepcao/pussy.json', '{\n    "bg": ['..getProperty("bg.x")..', '..getProperty("bg.y")..'],\n    "eleva": ['..getProperty("elevador.x")..', '..getProperty("elevador.y")..'],\n    "tober": ['..getProperty("tober.x")..', '..getProperty("tober.y")..']\n}', true)
+        saveFile('mods/PaperMania/data/recepcao/pussy.json', '{\n    "bg": ['..getProperty("bg.x")..', '..getProperty("bg.y")..', '..getProperty("bg.scale.x")..', '..getProperty("bg.scale.y")..'],\n    "eleva": ['..getProperty("elevador.x")..', '..getProperty("elevador.y")..'],\n    "tober": ['..getProperty("tober.x")..', '..getProperty("tober.y")..']\n}', true)
         debugPrint('                                                               Arquivo salvo', '00ff00')
     end
 
     if keyboardPressed("CONTROL") then
         quanto = 10
+        quantoScale = 0.1
     else
         quanto = 1
+        quantoScale = 0.01
     end
 
     if ativado then
-        setTextString("bucetas", "Debug info:\nEdit mode: "..string.upper(tostring(ativado))..'\nObj selecionado: '..string.upper(tags[curTag])..'\nObj X: '..getProperty(tags[curTag]..".x")..'\nObj Y: '..getProperty(tags[curTag]..".y")..'\n\nPlayer info:\nBF X: '..getProperty("boyfriend.x")..'\nBF Y: '..getProperty("boyfriend.y")..'\n\nCamera info:\nCam X: '..getCameraFollowX()..'\nCam Y: '..getCameraFollowY())
+        setTextString("bucetas", "Debug info:\nEdit mode: "..string.upper(tostring(ativado))..'\nObj selecionado: '..string.upper(tags[curTag])..'\nObj X: '..getProperty(tags[curTag]..".x")..'\nObj Y: '..getProperty(tags[curTag]..".y")..'\nObj Scale: '..getProperty(tags[curTag]..".scale.x")..'\n\nPlayer info:\nBF X: '..getProperty("boyfriend.x")..'\nBF Y: '..getProperty("boyfriend.y")..'\n\nCamera info:\nCam X: '..getCameraFollowX()..'\nCam Y: '..getCameraFollowY())
         screenCenter("bucetas", 'y')
     else
         setTextString("bucetas", '')

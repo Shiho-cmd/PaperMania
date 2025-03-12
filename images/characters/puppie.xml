@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="puppie.png" width="4884" height="906">
+  <SubTexture name="down0001" x="0" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="down0002" x="407" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="downMiss0001" x="814" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="downMiss0002" x="1221" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0001" x="1628" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0002" x="2035" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0003" x="2442" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="left0001" x="2849" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="left0002" x="3256" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="leftMiss0001" x="3663" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="leftMiss0002" x="4070" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="right0001" x="4477" y="0"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="right0002" x="0" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="rightMiss0001" x="407" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="rightMiss0002" x="814" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="up0001" x="1221" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="up0002" x="1628" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="upMiss0001" x="2035" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="upMiss0002" x="2442" y="453"  width="407" height="453" frameX="-235" frameY="-81" frameWidth="768" frameHeight="768"/>
+</TextureAtlas>

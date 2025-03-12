@@ -1,3 +1,7 @@
+function parseJson(file)
+    return callMethodFromClass('tjson.TJSON', 'parse', {getTextFromFile(file)})
+end
+
 local bfRGBNr = { 'C24B99', '00FFFF', '12FA05', 'F9393F' }
 local bfRGBNg = { 'FFFFFF', 'FFFFFF', 'FFFFFF', 'FFFFFF' }
 local bfRGBNb = { '3C1F56', '1542B7', '0A4447', '651038' }
@@ -9,6 +13,9 @@ local moveMiddle = {-90 - 0.5, -90, -90 + 0.5}
 local curArrow = 0
 
 local hide
+
+local player1 = parseJson('characters/'..boyfriendName..'.json')
+local player2 = parseJson('characters/'..dadName..'.json')
 
 function onCreate()
 
@@ -24,16 +31,64 @@ function onCreate()
     setProperty("bar.alpha", healthBarAlpha)
     setProperty("bar.visible", hide)
     addLuaSprite("bar", false)
+
+    makeLuaSprite("icon1")
+    loadGraphic("icon1", "icons/icon-"..player1.healthicon, 150, 150)
+    addAnimation("icon1", "normal", {1}, 0, false)
+    addAnimation("icon1", "lose", {0}, 0, false)
+    setObjectCamera("icon1", 'hud')
+    setProperty("icon1.flipX", true)
+    scaleObject("icon1", 0.7, 0.7, false)
+    addLuaSprite("icon1", false)
+
+    makeLuaSprite("icon2")
+    loadGraphic("icon2", "icons/icon-"..player2.healthicon, 150, 150)
+    addAnimation("icon2", "normal", {0}, 0, false)
+    addAnimation("icon2", "lose", {1}, 0, false)
+    setObjectCamera("icon2", 'hud')
+    scaleObject("icon2", 0.7, 0.7, false)
+    addLuaSprite("icon2", false)
+end
+
+function onEvent(eventName, value1, value2, strumTime)
+    
+    if eventName == 'Change Character' then
+        player1 = parseJson('characters/'..boyfriendName..'.json')
+        player2 = parseJson('characters/'..dadName..'.json')
+
+        precacheImage("icons/icon-"..player1.healthicon)
+        precacheImage("icons/icon-"..player2.healthicon)
+
+        makeLuaSprite("icon1")
+        loadGraphic("icon1", "icons/icon-"..player1.healthicon, 150, 150)
+        addAnimation("icon1", "normal", {1}, 0, false)
+        addAnimation("icon1", "lose", {0}, 0, false)
+        setObjectCamera("icon1", 'hud')
+        setProperty("icon1.flipX", true)
+        addLuaSprite("icon1", false)
+
+        makeLuaSprite("icon2")
+        loadGraphic("icon2", "icons/icon-"..player2.healthicon, 150, 150)
+        addAnimation("icon2", "normal", {0}, 0, false)
+        addAnimation("icon2", "lose", {1}, 0, false)
+        setObjectCamera("icon2", 'hud')
+        addLuaSprite("icon2", false)
+
+        setObjectOrder("icon1", 99)
+        setObjectOrder("icon2", 99)
+    end
 end
 
 function onCreatePost()
     
     setObjectOrder("healthBar", 99)
     setObjectOrder("bar", 99)
-    setObjectOrder("iconP1", 99)
-    setObjectOrder("iconP2", 99)
+    setObjectOrder("icon1", 99)
+    setObjectOrder("icon2", 99)
     setProperty("timeBar.visible", false)
     setProperty("timeTxt.visible", false)
+    setProperty("iconP1.visible", false)
+    setProperty("iconP2.visible", false)
     setProperty("scoreTxt.visible", false)
 
     if downscroll and not middlescroll then
@@ -74,7 +129,11 @@ function onSpawnNote(id, nd, nt, sus)
     end
 end
 
+local elap
+
 function onUpdate(elapsed)
+
+    elap = elapsed
 
     if not middlescroll then
         setProperty("bar.angle", move[barThing])
@@ -89,24 +148,36 @@ function onUpdatePost(e)
     setProperty("healthBar.x", getMidpointX("bar") - 208)
     setProperty("healthBar.scale.x", 0.51)
 
+    if getHealth() >= 0.2 then
+        playAnim("icon1", "lose", true)
+    else
+        playAnim("icon1", "normal", true)
+    end
+    
+    if getHealth() > 1.8 then
+        playAnim("icon2", "lose", true)
+    else
+        playAnim("icon2", "normal", true)
+    end
+
     if downscroll and not middlescroll then
-        setProperty("iconP1.x", getProperty("bar.x") + 390)
-        setProperty("iconP1.y", getProperty("bar.y") - 15)
-        setProperty("iconP2.x", getProperty("bar.x"))
-        setProperty("iconP2.y", getProperty("bar.y") - 15)
+        setProperty("icon1.x", getProperty("bar.x") + 373)
+        setProperty("icon1.y", getProperty("bar.y") - 10)
+        setProperty("icon2.x", getProperty("bar.x") + 23)
+        setProperty("icon2.y", getProperty("bar.y") - 10)
     elseif not downscroll and not middlescroll then
-        setProperty("iconP1.x", getProperty("bar.x") + 390)
-        setProperty("iconP1.y", getProperty("bar.y"))
-        setProperty("iconP2.x", getProperty("bar.x"))
-        setProperty("iconP2.y", getProperty("bar.y"))
+        setProperty("icon1.x", getProperty("bar.x") + 373)
+        setProperty("icon1.y", getProperty("bar.y") - 15)
+        setProperty("icon2.x", getProperty("bar.x") + 23)
+        setProperty("icon2.y", getProperty("bar.y") - 15)
     elseif middlescroll then
         setProperty("healthBar.angle", -90)
         setProperty("healthBar.x", getMidpointX("bar") - 208)
-        setProperty("iconP2.flipX", true)
-        setProperty("iconP1.x", getProperty("bar.x") + 200)
-        setProperty("iconP1.y", getProperty("bar.y") - 210)
-        setProperty("iconP2.x", getProperty("bar.x")+ 200)
-        setProperty("iconP2.y", getProperty("bar.y") + 180)
+        setProperty("icon2.flipX", true)
+        setProperty("icon1.x", getProperty("bar.x") + 200)
+        setProperty("icon1.y", getProperty("bar.y") - 210)
+        setProperty("icon2.x", getProperty("bar.x")+ 200)
+        setProperty("icon2.y", getProperty("bar.y") + 180)
     end
 
     for i=0, getProperty('playerStrums.length')-1 do
@@ -122,6 +193,14 @@ end
 function onBeatHit()
     
     barThing = getRandomInt(1, 3)
+
+    scaleObject("icon1", 0.9, 0.9, false)
+    doTweenX("huh", "icon1.scale", 0.7, 0.6, "quadOut")
+    doTweenY("hu", "icon1.scale", 0.7, 0.6, "quadOut")
+    
+    scaleObject("icon2", 0.9, 0.9, false)
+    doTweenX("uhu", "icon2.scale", 0.7, 0.6, "quadOut")
+    doTweenY("uh", "icon2.scale", 0.7, 0.6, "quadOut")
 end
 
 -- this code here is a little modification of Unbekannt0 fancy note splashes script (https://gamebanana.com/mods/546439)

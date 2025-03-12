@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="peppy.png" width="3289" height="286">
+  <SubTexture name="down0001" x="0" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="down0002" x="299" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0001" x="598" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0002" x="897" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="idle0003" x="1196" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="left0001" x="1495" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="left0002" x="1794" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="right0001" x="2093" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="right0002" x="2392" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="up0001" x="2691" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+  <SubTexture name="up0002" x="2990" y="0"  width="299" height="286" frameX="-215" frameY="-185" frameWidth="768" frameHeight="768"/>
+</TextureAtlas>

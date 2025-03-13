@@ -1,0 +1,3 @@
+Hides or makes the health bar appear
+
+value 1: "hide" to hide or "appear" to appear (wow)

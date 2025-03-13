@@ -13,9 +13,26 @@ local moveMiddle = {-90 - 0.5, -90, -90 + 0.5}
 local curArrow = 0
 
 local hide
+local funnyAlpha = healthBarAlpha
 
 local player1 = parseJson('characters/'..boyfriendName..'.json')
 local player2 = parseJson('characters/'..dadName..'.json')
+
+local textos = {
+    getTranslationPhrase('text1', 'Hi! :3'),
+    getTranslationPhrase('text2', 'Funny Text'),
+    getTranslationPhrase('text3', 'We don\'t have the budget to make a better pause menu sorry'),
+    getTranslationPhrase('text4', 'FNF is mid'),
+    getTranslationPhrase('text5', 'I\'m papering my mania till i pause'),
+    getTranslationPhrase('text6', 'Also try YeahMan!'),
+    getTranslationPhrase('text7', 'Also try Vs Impostor!'),
+    getTranslationPhrase('text8', 'Also try FNF Kero!'),
+    getTranslationPhrase('text9', 'Also try Hotline 024!'),
+    getTranslationPhrase('text10', '{1}? more like trash BOOM B)', {songName}),
+    getTranslationPhrase('text11', 'Ma balls itch...'),
+    getTranslationPhrase('text12', 'Full of bugs!'),
+    getTranslationPhrase('text13', 'Full of glitches!')
+}
 
 function onCreate()
 
@@ -38,6 +55,8 @@ function onCreate()
     addAnimation("icon1", "lose", {0}, 0, false)
     setObjectCamera("icon1", 'hud')
     setProperty("icon1.flipX", true)
+    setProperty("icon1.alpha", healthBarAlpha)
+    setProperty("icon1.visible", hide)
     scaleObject("icon1", 0.7, 0.7, false)
     addLuaSprite("icon1", false)
 
@@ -46,6 +65,8 @@ function onCreate()
     addAnimation("icon2", "normal", {0}, 0, false)
     addAnimation("icon2", "lose", {1}, 0, false)
     setObjectCamera("icon2", 'hud')
+    setProperty("icon2.alpha", healthBarAlpha)
+    setProperty("icon2.visible", hide)
     scaleObject("icon2", 0.7, 0.7, false)
     addLuaSprite("icon2", false)
 end
@@ -53,6 +74,7 @@ end
 function onEvent(eventName, value1, value2, strumTime)
     
     if eventName == 'Change Character' then
+
         player1 = parseJson('characters/'..boyfriendName..'.json')
         player2 = parseJson('characters/'..dadName..'.json')
 
@@ -65,26 +87,53 @@ function onEvent(eventName, value1, value2, strumTime)
         addAnimation("icon1", "lose", {0}, 0, false)
         setObjectCamera("icon1", 'hud')
         setProperty("icon1.flipX", true)
+        setProperty("icon1.alpha", healthBarAlpha)
+        setProperty("icon1.visible", hide)
         addLuaSprite("icon1", false)
 
         makeLuaSprite("icon2")
         loadGraphic("icon2", "icons/icon-"..player2.healthicon, 150, 150)
         addAnimation("icon2", "normal", {0}, 0, false)
         addAnimation("icon2", "lose", {1}, 0, false)
+        setProperty("icon2.alpha", healthBarAlpha)
+        setProperty("icon2.visible", hide)
         setObjectCamera("icon2", 'hud')
         addLuaSprite("icon2", false)
 
-        setObjectOrder("icon1", 99)
-        setObjectOrder("icon2", 99)
+        addToGroup('uiGroup', 'icon1')
+        addToGroup('uiGroup', 'icon2')
+    end
+
+    if eventName == 'Move Health Bar' then
+        if value1 == 'hide' then
+            funnyAlpha = 0
+            if downscroll and not middlescroll then
+                doTweenY("hi", "bar", -getProperty("bar.height"), 1, "quartOut")
+            elseif not downscroll and not middlescroll then
+                doTweenY("hi", "bar", screenHeight, 1, "quartOut")
+            elseif middlescroll then
+                doTweenX("hi", "bar", screenWidth, 1, "quartOut")
+            end
+        elseif value1 == 'appear' then
+            funnyAlpha = healthBarAlpha
+            setProperty("icon1.alpha", funnyAlpha)
+            setProperty("icon2.alpha", funnyAlpha)
+            if downscroll and not middlescroll then
+                doTweenY("hi", "bar", -10, 1, "quartOut")
+            elseif not downscroll and not middlescroll then
+                doTweenY("hi", "bar", screenHeight - getProperty("bar.height") + 10, 1, "quartOut")
+            elseif middlescroll then
+                doTweenX("hi", "bar", screenWidth - 330, 1, "quartOut")
+            end
+        end
     end
 end
 
 function onCreatePost()
     
-    setObjectOrder("healthBar", 99)
-    setObjectOrder("bar", 99)
-    setObjectOrder("icon1", 99)
-    setObjectOrder("icon2", 99)
+    addToGroup('uiGroup', 'bar')
+    addToGroup('uiGroup', 'icon1')
+    addToGroup('uiGroup', 'icon2')
     setProperty("timeBar.visible", false)
     setProperty("timeTxt.visible", false)
     setProperty("iconP1.visible", false)
@@ -105,17 +154,6 @@ function onCreatePost()
     end
 end
 
-function onSongStart()
-    
-    if downscroll and not middlescroll then
-        doTweenY("hi", "bar", -10, 1, "quartOut")
-    elseif not downscroll and not middlescroll then
-        doTweenY("hi", "bar", screenHeight - getProperty("bar.height") + 10, 1, "quartOut")
-    elseif middlescroll then
-        doTweenX("hi", "bar", screenWidth - 330, 1, "quartOut")
-    end
-end
-
 function onSpawnNote(id, nd, nt, sus)
     
     if getPropertyFromGroup('notes', id, 'mustPress') == true then
@@ -124,16 +162,11 @@ function onSpawnNote(id, nd, nt, sus)
         setPropertyFromGroup('notes', id, 'noteSplashData.g', getColorFromHex(bfRGBNg[getPropertyFromGroup('notes', id, 'noteData')+1]))
         setPropertyFromGroup('notes', id, 'noteSplashData.b', getColorFromHex(bfRGBNb[getPropertyFromGroup('notes', id, 'noteData')+1]))
     else
-        setPropertyFromGroup('notes', id, 'rgbShader.enabled', false)
         setPropertyFromGroup('notes', id, 'visible', false)
     end
 end
 
-local elap
-
 function onUpdate(elapsed)
-
-    elap = elapsed
 
     if not middlescroll then
         setProperty("bar.angle", move[barThing])
@@ -185,7 +218,6 @@ function onUpdatePost(e)
     end
     
     for i=0, getProperty('opponentStrums.length')-1 do
-        setPropertyFromGroup('opponentStrums', i, 'rgbShader.enabled', false)
         setPropertyFromGroup('opponentStrums', i, 'visible', false)
     end
 end
@@ -201,6 +233,30 @@ function onBeatHit()
     scaleObject("icon2", 0.9, 0.9, false)
     doTweenX("uhu", "icon2.scale", 0.7, 0.6, "quadOut")
     doTweenY("uh", "icon2.scale", 0.7, 0.6, "quadOut")
+end
+
+function onPause()
+    
+    playSound("pauseopen", 1)
+
+    makeLuaText("oi", textos[getRandomInt(1, #textos)], 0, 0.0, 0.0)
+    setObjectCamera("oi", 'other')
+    addLuaText("oi")
+    setProperty("oi.x", screenWidth - getProperty("oi.width"))
+    setProperty("oi.y", screenHeight - getProperty("oi.height"))
+end
+
+function onResume()
+    
+    removeLuaText("oi", true)
+end
+
+function onTweenCompleted(tag, vars)
+    
+    if tag == 'hi' then
+        setProperty("icon1.alpha", funnyAlpha)
+        setProperty("icon2.alpha", funnyAlpha)
+    end
 end
 
 -- this code here is a little modification of Unbekannt0 fancy note splashes script (https://gamebanana.com/mods/546439)

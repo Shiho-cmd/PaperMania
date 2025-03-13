@@ -1,0 +1,5 @@
+Prints something on screen
+This event is used just for anotation lol
+
+value1: Text to print
+value2: Text color

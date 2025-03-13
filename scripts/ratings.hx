@@ -10,4 +10,3 @@ function onUpdate(n):Void {
     comboGroup.x = playerX - offsetX;
     comboGroup.y = playerY - offsetY;
 }
-

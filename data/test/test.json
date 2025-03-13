@@ -1,6 +1,57 @@
 {
 	"player1": "bf",
-	"events": [],
+	"events": [
+		[
+			0,
+			[
+				["Debug Print", "Teste vídeo no bg", ""]
+			]
+		],
+		[
+			17812.5,
+			[
+				["Move Health Bar", "appear", ""],
+				["Debug Print", "Teste do evento de mover a barra de vida (aparecer)", ""]
+			]
+		],
+		[
+			38515.625,
+			[
+				["Debug Print", "Teste do evento de mover a barra de vida (esconder)", ""],
+				["Move Health Bar", "hide", ""]
+			]
+		],
+		[
+			50885.4166666667,
+			[
+				["ahha", "ah", ""],
+				["Debug Print", "Teste AH", ""]
+			]
+		],
+		[
+			51126.3020833333,
+			[
+				["ahha", "ha", ""],
+				["Debug Print", "Teste HA", ""]
+			]
+		],
+		[
+			51282.5520833333,
+			[
+				["ahha", "ha", ""],
+				["Move Health Bar", "appear", ""],
+				["Debug Print", "Teste HA", ""]
+			]
+		],
+		[
+			51523.4375,
+			[
+				["Change Character", "dad", "peppy"],
+				["Change Character", "bf", "puppie"],
+				["Debug Print", "Teste pra ver se os ícones tão mudando de boa quando muda de personagem", ""]
+			]
+		]
+	],
 	"gfVersion": "gf",
 	"notes": [
 		{
@@ -561,7 +612,7 @@
 				[51008.1618394309, 6, 0],
 				[51126.3020833333, 2, 0]
 			],
-			"mustHitSection": false
+			"mustHitSection": true
 		},
 		{
 			"sectionBeats": 4,
@@ -1592,7 +1643,7 @@
 			"bpm": 192
 		}
 	],
-	"player2": "puppie-opponent",
+	"player2": "bf-pixel-opponent",
 	"disableNoteRGB": false,
 	"offset": 0,
 	"splashSkin": "noteSplashes/noteSplashes-yeahsplashes",

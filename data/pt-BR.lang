@@ -4,6 +4,20 @@ Português (Brasil)
 helpText: "Movimentação: {1}, {2}\n\nCorrer: {3}\n\nInteragir: {4}"
 helpTextSplash: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAperte F1 para receber ajuda!"
 
+// Textos do pause
+text1: "Oi! :3"
+text2: "Texto Engraçado"
+text3: "Nós não temos a grana pra fazer um menu de pause melhor desculpa"
+text4: "FNF é paia"
+text5: "Estou papelando minha mania até eu pausar"
+text6: "Tente também YeahMan!"
+text7: "Tente também Vs Impostor!"
+text8: "Tente também FNF Kero!"
+text9: "Tente também Hotline 024!"
+text10: "{1}? tá mais pra fudido BUMCHACALACA B)"
+text11: "Minhas bola coça..."
+text12: "Cheio de bugs!"
+text13: "Cheio de glitches!"
 
 // Configs
 setting_left_key: "Botão Esquerda:"

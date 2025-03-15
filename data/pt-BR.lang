@@ -3,6 +3,8 @@ Português (Brasil)
 // Geral
 helpText: "Movimentação: {1}, {2}\n\nCorrer: {3}\n\nInteragir: {4}"
 helpTextSplash: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAperte F1 para receber ajuda!"
+saving: "Salvando {1}..."
+saved: "{1} salvo com sucesso!"
 
 // Textos do pause
 text1: "Oi! :3"
@@ -18,6 +20,7 @@ text10: "{1}? tá mais pra fudido BUMCHACALACA B)"
 text11: "Minhas bola coça..."
 text12: "Cheio de bugs!"
 text13: "Cheio de glitches!"
+text14: "Direitos trans são direitos humanos!"
 
 // Configs
 setting_left_key: "Botão Esquerda:"
@@ -31,3 +34,8 @@ description_confirm_key: "Usado para confirmar/interagir no mundo aberto."
 
 setting_run_key: "Botão Correr:"
 description_run_key: "Usado para correr/cancelar no mundo aberto."
+
+// Dificuldades
+difficulty_file1: "Arquivo1"
+difficulty_file2: "Arquivo2"
+difficulty_file3: "Arquivo3"

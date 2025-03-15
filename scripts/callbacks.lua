@@ -46,12 +46,13 @@ end
 
 function _playTransition(name)
 
-    playSound("")
     playAnim("trans", name)
     setProperty("trans.alpha", 1)
 
     if name == 'close' then
         playSound("paperOut", 1, 'out')
+    elseif name == 'open' then
+        playSound("paperIn", 1, 'in')
     end
 end
 
@@ -170,13 +171,8 @@ function onUpdate(elapsed)
         canStart = true
         startCountdown()
         setProperty("trans.alpha", 0.00001)
-    end
-end
-
-function onUpdatePost(elapsed)
-    
-    if getProperty('trans.animation.curAnim.name') == 'open' and getProperty('trans.animation.curAnim.finished') then
-        playAnim("trans", "loop")
+    elseif getProperty('trans.animation.curAnim.name') == 'open' and getProperty('trans.animation.curAnim.finished') then
+        playAnim("trans", "loop", true)
     elseif getProperty('trans.animation.curAnim.name') == 'close' and getProperty('trans.animation.curAnim.finished') then
         setProperty("trans.alpha", 0.00001)
     end

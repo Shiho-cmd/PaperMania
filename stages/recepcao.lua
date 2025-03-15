@@ -35,7 +35,7 @@ local rightKey = getModSetting('keyRight')
 local acceptKey = getModSetting('keyAccept')
 local runKey = getModSetting('keyRun')
 
-local clicavel = false
+local podePORRA = true
 
 local pintoes = parseJson('data/recepcao/dicks.json')
 local bucetoes = parseJson('data/recepcao/pussy.json')
@@ -62,15 +62,18 @@ local maxTagNum = 3
 
 local help = 1
 
+local exit
+
 function onStartCountdown()
     
     setProperty("dadGroup.visible", false)
     setProperty("botplayTxt.visible", false)
-    triggerEvent("Camera Follow Pos", saveShit.startCam[1], saveShit.startCam[2])
     return Function_Stop;
 end
 
 function onCreate()
+
+    initSaveData('saveData-'..difficultyName, 'PaperMania')
 
     precacheImage("bg/recepcao/toby")
     precacheImage("bg/recepcao/elevador")
@@ -81,9 +84,6 @@ function onCreate()
     debugPrint(getTranslationPhrase('helpTextSplash', '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress F1 for help!'), 'FFA500')
 
     playSound("yeahresident", 0.5, 'bgm', true)
-	
-    setCharacterX("boyfriend", saveShit.playerSpawn[1])
-    setCharacterY("boyfriend", saveShit.playerSpawn[2])
 
     makeLuaSprite("bg", 'bg/recepcao/recepbg', bucetoes.bg[1], bucetoes.bg[2])
     scaleObject("bg", bucetoes.bg[3], bucetoes.bg[4])
@@ -118,7 +118,21 @@ function onCreate()
     setProperty("back.alpha", 0.00001)
     addLuaSprite("back", false)
 
+    makeLuaText('save', 'Now Saving...', 0, 0, screenHeight - 35)
+    setObjectCamera('save', 'other')
+    setTextSize('save', 35)
+    setProperty('save.alpha', 0.0001)
+    addLuaText('save')
+
     runTimer("ajeitar", 0.2)
+end
+
+function onCreatePost()
+
+    setProperty("boyfriend.x", getDataFromSave('saveData-'..difficultyName, 'bfX', -490))
+    setProperty("boyfriend.y", getDataFromSave('saveData-'..difficultyName, 'bfY', 330))
+    setProperty("boyfriend.flipX", getDataFromSave('saveData-'..difficultyName, 'bfFlipX', false))
+    triggerEvent("Camera Follow Pos", getDataFromSave('saveData-'..difficultyName, 'startCamX', 902.5), getDataFromSave('saveData-'..difficultyName, 'startCamY', 698.82))
 end
 
 function onUpdate(elapsed)
@@ -132,9 +146,11 @@ function onUpdate(elapsed)
     end
 
     if help == 2 then
+        podePORRA = false
         doTweenAlpha("pinto", "penis", 1, 0.3, "linear")
         doTweenAlpha("bucetudo", "back", 0.5, 0.3, "linear")
     elseif help == 1 then
+        podePORRA = true
         doTweenAlpha("pinto", "penis", 0.00001, 0.1, "linear")
         doTweenAlpha("bucetudo", "back", 0.00001, 0.1, "linear")
     end
@@ -177,7 +193,7 @@ function onUpdate(elapsed)
     if getProperty("boyfriend.x") >= 4940 then
         keyShit('in')
 
-        if keyboardJustPressed(acceptKey.keyboard) and npcInteract('tober') then    
+        if keyboardJustPressed(acceptKey.keyboard) and npcInteract('tober') and podePORRA then
             playSound("toby_bark", 1, 'bark')
             setSoundPitch('bark', getRandomFloat(1.3, 0.7))
         end
@@ -187,25 +203,48 @@ function onUpdate(elapsed)
         keyShit('out')
     end
 
-    if keyboardPressed(rightKey.keyboard) and moveRight or anyGamepadPressed(rightKey.gamepad) and moveRight then
-        charMove('boyfriend', moveAnim, 'right', velo, false, false, 0, 0)
-        setCamOffset('boyfriend', camX, camY, enableCam)
-        useWalkSound(true, 'walk', veloSom)
-    elseif keyboardReleased(rightKey.keyboard) or anyGamepadReleased(rightKey.gamepad) then
-        stopMove('boyfriend', 'idle')
-
-    elseif keyboardPressed(leftKey.keyboard) and moveLeft or anyGamepadPressed(leftKey.gamepad) and moveLeft then
-        charMove('boyfriend', moveAnim, 'left', velo, true, false, 60, 0)
-        setCamOffset('boyfriend', camX, camY, enableCam)
-        useWalkSound(true, 'walk', veloSom)
-    elseif keyboardReleased(leftKey.keyboard) or anyGamepadReleased(leftKey.gamepad) then
-        stopMove('boyfriend', 'idle')
-    end
-
-    if keyJustPressed('back') then
-        --saveFile("mods/PaperMania/data/saveData-"..difficultyName..'.json', '{\n    "playerSpawn": ['..getProperty("boyfriend.x")..', '..getProperty("boyfriend.y")..'],\n    "curRoom": ["'..room..'"],\n    "startCam": ['..getCameraFollowX()..', '..getCameraFollowY()..']\n}', true)
-        exitSong(false)
-        stopSound("bgm")
+    if podePORRA then
+        if keyboardPressed(rightKey.keyboard) and moveRight or anyGamepadPressed(rightKey.gamepad) and moveRight then
+            charMove('boyfriend', moveAnim, 'right', velo, false, false, 0, 0)
+            setCamOffset('boyfriend', camX, camY, enableCam)
+            useWalkSound(true, 'walk', veloSom)
+        elseif keyboardReleased(rightKey.keyboard) or anyGamepadReleased(rightKey.gamepad) then
+            stopMove('boyfriend', 'idle')
+        
+        elseif keyboardPressed(leftKey.keyboard) and moveLeft or anyGamepadPressed(leftKey.gamepad) and moveLeft then
+            charMove('boyfriend', moveAnim, 'left', velo, true, false, 60, 0)
+            setCamOffset('boyfriend', camX, camY, enableCam)
+            useWalkSound(true, 'walk', veloSom)
+        elseif keyboardReleased(leftKey.keyboard) or anyGamepadReleased(leftKey.gamepad) then
+            stopMove('boyfriend', 'idle')
+        elseif keyJustPressed('back') then
+            podePORRA = false
+            exit = true
+            setDataFromSave('saveData-'..difficultyName, 'bfX', getProperty("boyfriend.x"))
+            setDataFromSave('saveData-'..difficultyName, 'bfY', getProperty("boyfriend.y"))
+            setDataFromSave('saveData-'..difficultyName, 'bfFlipX', getProperty("boyfriend.flipX"))
+            setDataFromSave('saveData-'..difficultyName, 'startCamX', getCameraFollowX())
+            setDataFromSave('saveData-'..difficultyName, 'startCamY', getCameraFollowY())
+            setDataFromSave('saveData-'..difficultyName, 'room', 'recepcao')
+            removeLuaScript("scripts/callbacks")
+            stopSound("out")
+            stopSound("bgm")
+            stopSound("walk")
+            stopSound("bark")
+            playAnim("trans", 'open')
+            setProperty("trans.alpha", 1)
+            playSound("paperIn", 1, 'in')
+        elseif keyboardPressed("CONTROL") and keyboardJustPressed("S") then
+            setTextString('save', getTranslationPhrase('saving', 'Saving {2}...', {'ARQUIVO '..string.gsub(difficultyName, "file", ""), 'FILE '..string.gsub(difficultyName, "file", "")}))
+            setTextColor('save', 'FFFFFF')
+            doTweenAlpha('sex', 'save', 1, 0.5, 'linear')
+            playAnim("trans", 'open')
+            setProperty("trans.alpha", 1)
+            playSound("paperIn", 1, 'in')
+            soundFadeOut('bgm', 0.3, 0)
+            playMusic('breakfast', 0, true)
+            soundFadeIn(_, 0.3, 0, 1)
+        end
     end
 
     if keyboardJustPressed("Q") then
@@ -291,4 +330,34 @@ function onTimerCompleted(tag, loops, loopsLeft)
     if tag == 'ajeitar' then
         setProperty("cameraSpeed", 1)
     end
+end
+
+function onSoundFinished(tag)
+    
+    if tag == 'in' and exit then
+        exitSong(false)
+    elseif tag == 'in' and not exit then
+        setDataFromSave('saveData-'..difficultyName, 'bfX', getProperty("boyfriend.x"))
+        setDataFromSave('saveData-'..difficultyName, 'bfY', getProperty("boyfriend.y"))
+        setDataFromSave('saveData-'..difficultyName, 'bfFlipX', getProperty("boyfriend.flipX"))
+        setDataFromSave('saveData-'..difficultyName, 'startCamX', getCameraFollowX())
+        setDataFromSave('saveData-'..difficultyName, 'startCamY', getCameraFollowY())
+        setDataFromSave('saveData-'..difficultyName, 'room', 'recepcao')
+        flushSaveData('saveData-'..difficultyName)
+        setTextString('save', getTranslationPhrase('saved', 'Saved {2} successfully!', {'ARQUIVO '..string.gsub(difficultyName, "file", ""), 'FILE '..string.gsub(difficultyName, "file", "")}))
+        setTextColor('save', '00FF00')
+        doTweenAlpha('sex', 'save', 0.0001, 0.5, 'linear')
+        playAnim("trans", 'close')
+        playSound("paperOut", 1, 'out')
+        soundFadeOut(_, 0.3, 0)
+        soundFadeIn('bgm', 0.3, 0, 1)
+        playSound('confirmMenu', 1)
+    elseif tag == 'out'then
+        podePORRA = true
+    end
+end
+
+function onDestroy()
+    
+    flushSaveData('saveData-'..difficultyName)
 end

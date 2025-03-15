@@ -31,22 +31,24 @@ local textos = {
     getTranslationPhrase('text10', '{1}? more like trash BOOM B)', {songName}),
     getTranslationPhrase('text11', 'Ma balls itch...'),
     getTranslationPhrase('text12', 'Full of bugs!'),
-    getTranslationPhrase('text13', 'Full of glitches!')
+    getTranslationPhrase('text13', 'Full of glitches!'),
+    getTranslationPhrase('text14', 'Trans rights are human rights!'),
 }
 
-function onCreate()
+function onCountdownStarted()
+    
+    setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 20)
+    setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 + 10)
+    setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 + 30)
+end
 
-    if hideHud then
-        hide = false
-    else
-        hide = true
-    end
+function onCreate()
     
     makeLuaSprite("bar", 'ui/healthBarContainer', 0, 0)
     setObjectCamera("bar", 'hud')
     scaleObject("bar", 0.5, 0.5) 
     setProperty("bar.alpha", healthBarAlpha)
-    setProperty("bar.visible", hide)
+    setProperty("bar.visible", not hideHud)
     addLuaSprite("bar", false)
 
     makeLuaSprite("icon1")
@@ -56,7 +58,7 @@ function onCreate()
     setObjectCamera("icon1", 'hud')
     setProperty("icon1.flipX", true)
     setProperty("icon1.alpha", healthBarAlpha)
-    setProperty("icon1.visible", hide)
+    setProperty("icon1.visible", not hideHud)
     scaleObject("icon1", 0.7, 0.7, false)
     addLuaSprite("icon1", false)
 
@@ -66,7 +68,7 @@ function onCreate()
     addAnimation("icon2", "lose", {1}, 0, false)
     setObjectCamera("icon2", 'hud')
     setProperty("icon2.alpha", healthBarAlpha)
-    setProperty("icon2.visible", hide)
+    setProperty("icon2.visible", not hideHud)
     scaleObject("icon2", 0.7, 0.7, false)
     addLuaSprite("icon2", false)
 end
@@ -214,7 +216,7 @@ function onUpdatePost(e)
     end
 
     for i=0, getProperty('playerStrums.length')-1 do
-        setPropertyFromGroup('playerStrums', i, 'rgbShader.enabled', false)        
+        setPropertyFromGroup('playerStrums', i, 'rgbShader.enabled', false)
     end
     
     for i=0, getProperty('opponentStrums.length')-1 do
@@ -267,12 +269,18 @@ function goodNoteHit(id, direction, noteType, isSustainNote)
 
         scaleObject('yeah'..curArrow, 0.3, 0.7, 0.01)
         if direction == 0 then a = 0 c = 'ff00ff' elseif direction == 1 then a = 270 c = '9999ff' elseif direction == 2 then a = 90 c = '00ff00' elseif direction== 3 then a = 180 c = 'ff0000' end
+        local randomAngle = {a - 5, a + 5}
+        local aRandom = getRandomInt(1, 2)
         setProperty('yeah'..curArrow..'.angle', a)
         setObjectCamera('yeah'..curArrow, 'camHUD')
         setProperty('yeah'..curArrow..'.alpha', 0.3)
+        setBlendMode('yeah'..curArrow, 'add')
+        setProperty('yeah'..curArrow..'.color', getColorFromHex(c))
+        setObjectOrder('yeah'..curArrow, 99)
         doTweenX('yeahXS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.4, 'quartOut');
         doTweenY('yeahYS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.4, 'quartOut');
         doTweenAlpha('yeahAplha'..curArrow, 'yeah'..curArrow, 0, 0.4)
+        doTweenAngle('yeahAngle', 'yeah'..curArrow, randomAngle[aRandom], 0.4, 'quartOut')
 
         local curBrrow = curArrow - 20
         addLuaSprite('yeah'..curArrow, false)

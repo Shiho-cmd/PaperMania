@@ -5,7 +5,7 @@
 	"weekBackground": "stage",
 	"weekBefore": "tutorial",
 	"startUnlocked": true,
-	"hideStoryMode": false,
+	"hideStoryMode": true,
 	"songs": [
 		[
 			"cum",
@@ -22,6 +22,6 @@
 		"bf",
 		"gf"
 	],
-	"hiddenUntilUnlocked": false,
-	"weekName": "Custom Week"
+	"weekName": "Custom Week",
+	"hiddenUntilUnlocked": false
 }

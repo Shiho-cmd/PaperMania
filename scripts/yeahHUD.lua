@@ -18,7 +18,7 @@ local funnyAlpha = healthBarAlpha
 local player1 = parseJson('characters/'..boyfriendName..'.json')
 local player2 = parseJson('characters/'..dadName..'.json')
 
-local textos = {
+--[[local textos = {
     getTranslationPhrase('text1', 'Hi! :3'),
     getTranslationPhrase('text2', 'Funny Text'),
     getTranslationPhrase('text3', 'We don\'t have the budget to make a better pause menu sorry'),
@@ -33,7 +33,7 @@ local textos = {
     getTranslationPhrase('text12', 'Full of bugs!'),
     getTranslationPhrase('text13', 'Full of glitches!'),
     getTranslationPhrase('text14', 'Trans rights are human rights!'),
-}
+}]]
 
 function onCountdownStarted()
     
@@ -175,6 +175,19 @@ function onUpdate(elapsed)
     else
         setProperty("bar.angle", moveMiddle[barThing])
     end
+
+    runHaxeCode([[
+        comboGroup.cameras = [camGame];
+
+        var playerX:Float = boyfriend.x;
+        var playerY:Float = boyfriend.y;
+
+        var offsetX:Float = 700; // How far to the right of the player you want the combo to appear
+        var offsetY:Float = 150; // How far above the player you want the combo to appear
+    
+        comboGroup.x = playerX - offsetX;
+        comboGroup.y = playerY - offsetY;
+    ]])
 end
 
 function onUpdatePost(e)
@@ -235,22 +248,6 @@ function onBeatHit()
     scaleObject("icon2", 0.9, 0.9, false)
     doTweenX("uhu", "icon2.scale", 0.7, 0.6, "quadOut")
     doTweenY("uh", "icon2.scale", 0.7, 0.6, "quadOut")
-end
-
-function onPause()
-    
-    playSound("pauseopen", 1)
-
-    makeLuaText("oi", textos[getRandomInt(1, #textos)], 0, 0.0, 0.0)
-    setObjectCamera("oi", 'other')
-    addLuaText("oi")
-    setProperty("oi.x", screenWidth - getProperty("oi.width"))
-    setProperty("oi.y", screenHeight - getProperty("oi.height"))
-end
-
-function onResume()
-    
-    removeLuaText("oi", true)
 end
 
 function onTweenCompleted(tag, vars)

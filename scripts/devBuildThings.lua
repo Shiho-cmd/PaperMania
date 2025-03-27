@@ -66,7 +66,7 @@ function onUpdate(elapsed)
     camX = getCameraFollowX() -- x da camera
     camY = getCameraFollowY()
 
-    velo = getTextFromFile("data/playbackRateSave.txt")
+    velo = 1
     
     if keyboardPressed("SHIFT") then
         num = 0.05
@@ -82,7 +82,7 @@ function onUpdate(elapsed)
         debugPrint('velocidade agora está em: '..playbackRate..'x', 'FFA500')
     elseif keyboardJustPressed("BACKSPACE") and getModSetting("butt") then
         setProperty("playbackRate", tonumber(velo))
-        setProperty("defaultCamZoom", ogCam.ogZoom)
+        setProperty("defaultCamZoom", ogCam.defaultZoom)
         triggerEvent("Camera Follow Pos", '', '')
         debugPrint('velocidade, zoom e câmera foram resetados')
     elseif keyboardJustPressed("ONE") and getModSetting("butt") then
@@ -92,8 +92,6 @@ function onUpdate(elapsed)
     elseif keyboardJustPressed("F5") and getModSetting("butt") then
         stopSound("bgm")
         restartSong(false)
-    elseif keyboardJustPressed("THREE") and getModSetting("butt") then
-        openOptions()
     elseif keyboardJustPressed("FOUR") and getModSetting("butt") then
         exitSong(false)
     elseif keyboardJustPressed("FIVE") and getModSetting("butt") then

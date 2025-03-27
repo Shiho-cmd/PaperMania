@@ -39,7 +39,6 @@ local podePORRA = true
 
 local pintoes = parseJson('data/recepcao/dicks.json')
 local bucetoes = parseJson('data/recepcao/pussy.json')
-local saveShit = parseJson('data/saveData-'..difficultyName..'.json')
 
 local room = 'recepcao'
 
@@ -104,7 +103,7 @@ function onCreate()
     setTextAlignment("bucetas", 'left')
     addLuaText("bucetas")
 
-    makeLuaText("penis", getTranslationPhrase('helpText', 'Movement: {1}, {2}\n\nRun: {3}\n\nInteract: {4}', {string.upper(tostring(leftKey.keyboard)), string.upper(tostring(rightKey.keyboard)), string.upper(tostring(runKey.keyboard)), string.upper(tostring(acceptKey.keyboard))}), 0, 0.0, 0.0)
+    makeLuaText("penis", getTranslationPhrase('helpText', 'Movement: {1}, {2} / {5}, {6}\n\nRun: {3} / {7}\n\nInteract: {4} / {8}', {leftKey.keyboard, rightKey.keyboard, runKey.keyboard, acceptKey.keyboard, leftKey.gamepad, rightKey.gamepad, runKey.gamepad, acceptKey.gamepad}), 0, 0.0, 0.0)
     setObjectCamera("penis", 'other')
     setTextSize("penis", 40)
     setTextAlignment("penis", 'center')
@@ -118,7 +117,7 @@ function onCreate()
     setProperty("back.alpha", 0.00001)
     addLuaSprite("back", false)
 
-    makeLuaText('save', 'Now Saving...', 0, 0, screenHeight - 35)
+    makeLuaText('save', '', 0, 0, screenHeight - 35)
     setObjectCamera('save', 'other')
     setTextSize('save', 35)
     setProperty('save.alpha', 0.0001)

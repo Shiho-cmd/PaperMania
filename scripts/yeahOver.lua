@@ -1,4 +1,5 @@
 local veloCoiso = false
+local numVaiAcaba = false
 local podeClicar = false
 
 function onCreate()
@@ -15,11 +16,23 @@ function onCreate()
     screenCenter('itsYeahOver')
     setProperty('itsYeahOver.alpha', 0.000001)
     addLuaSprite('itsYeahOver', true)
+
+    makeAnimatedLuaSprite("transs", 'transition/transition', 0, 0)
+    addAnimationByPrefix("transs", "loop", "Loop", 24, true)
+    addAnimationByPrefix("transs", "open", "Open", 24, false)
+    addAnimationByPrefix("transs", "close", "Close", 24, false)
+    scaleObject("transs", 1.2, 1.2)
+    setObjectCamera("transs", 'other')
+    screenCenter("transs")
+    setProperty('transs.alpha', 0.000001)
+    addLuaSprite("transs", true)
 end
 
 function onUpdate(elapsed)
 
     if veloCoiso then
+        numVaiAcaba = true
+        setOnLuas('canOpenPause', false)
         callMethod('KillNotes')
         setProperty('playbackRate', playbackRate - 0.01)
         setProperty('leEpicBlocoPreto.alpha', getProperty('leEpicBlocoPreto.alpha') + 0.01)
@@ -46,13 +59,20 @@ function onPause()
     end
 end
 
+function onEndSong()
+    
+    if numVaiAcaba then
+        return Function_Stop;
+    end
+end
+
 function onCustomSubstateCreate(name)
     
     if name == 'yeah...' then
         podeClicar = true
         playSound('ymDeath', 1, 'dead')
         insertToCustomSubstate('itsYeahOver')
-        insertToCustomSubstate('trans')
+        insertToCustomSubstate('transs')
         doTweenAlpha('...haey', 'itsYeahOver', 1, 1, 'linear')
     end
 end
@@ -63,14 +83,14 @@ function onCustomSubstateUpdate(name, elapsed)
         if keyJustPressed('accept') and podeClicar then
             podeClicar = false
             stopSound('dead')
-            playAnim("trans", 'open')
-            setProperty("trans.alpha", 1)
+            playAnim("transs", 'open')
+            setProperty("transs.alpha", 1)
             playSound("paperIn", 1, 'innn')
         elseif keyJustPressed('back') and podeClicar then
             podeClicar = false
             stopSound('dead')
-            playAnim("trans", 'open')
-            setProperty("trans.alpha", 1)
+            playAnim("transs", 'open')
+            setProperty("transs.alpha", 1)
             playSound("paperIn", 1, 'innnn')
         end
     end

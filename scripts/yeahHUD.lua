@@ -37,9 +37,9 @@ local player2 = parseJson('characters/'..dadName..'.json')
 
 function onCountdownStarted()
     
-    setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 20)
-    setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 + 10)
-    setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 + 30)
+    setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 10)
+    setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 + 3)
+    setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 + 13)
 end
 
 function onCreate()
@@ -260,7 +260,7 @@ end
 
 -- this code here is a little modification of Unbekannt0 fancy note splashes script (https://gamebanana.com/mods/546439)
 function goodNoteHit(id, direction, noteType, isSustainNote)
-    if not isSustainNote then
+    if not isSustainNote and splashAlpha ~= 0 then
         local strumMember = direction + 4
         makeLuaSprite('yeah'..curArrow, 'noteSkins/yeah', getProperty('game.strumLineNotes.members['..strumMember..'].x') - 30, getProperty('game.strumLineNotes.members['..strumMember..'].y') - 35)
 

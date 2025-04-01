@@ -168,9 +168,9 @@ function onUpdate(elapsed)
         enableCam = false
         camX = 902.5
         camY = 698.82
-    elseif getProperty("boyfriend.x") >= 4358 then
+    elseif getProperty("boyfriend.x") >= 15920 then
         enableCam = false
-        camX = 4736.5
+        camX = 16298.5
         camY = 698.82
     else
         enableCam = true
@@ -181,7 +181,7 @@ function onUpdate(elapsed)
     if getProperty("boyfriend.x") <= -508 then
         stopMove('boyfriend', 'idle')
         moveLeft = false
-    elseif getProperty("boyfriend.x") >= 4940 then
+    elseif getProperty("boyfriend.x") >= 16520 then
         stopMove('boyfriend', 'idle')
         moveRight = false
     else
@@ -189,14 +189,14 @@ function onUpdate(elapsed)
         moveRight = true
     end
 
-    if getProperty("boyfriend.x") >= 4940 then
+    if getProperty("boyfriend.x") >= 16520 then
         keyShit('in')
 
         if keyboardJustPressed(acceptKey.keyboard) and npcInteract('tober') and podePORRA then
             playSound("toby_bark", 1, 'bark')
             setSoundPitch('bark', getRandomFloat(1.3, 0.7))
         end
-    elseif getProperty("boyfriend.x") >= 2066 and getProperty("boyfriend.x") < 2768 then
+    elseif getProperty("boyfriend.x") >= 7862 and getProperty("boyfriend.x") < 8576 then
         keyShit('in')
     else
         keyShit('out')

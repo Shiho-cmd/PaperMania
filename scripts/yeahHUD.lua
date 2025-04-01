@@ -90,7 +90,7 @@ function onEvent(eventName, value1, value2, strumTime)
         setObjectCamera("icon1", 'hud')
         setProperty("icon1.flipX", true)
         setProperty("icon1.alpha", healthBarAlpha)
-        setProperty("icon1.visible", hide)
+        setProperty("icon1.visible", not hide)
         addLuaSprite("icon1", false)
 
         makeLuaSprite("icon2")
@@ -98,7 +98,7 @@ function onEvent(eventName, value1, value2, strumTime)
         addAnimation("icon2", "normal", {0}, 0, false)
         addAnimation("icon2", "lose", {1}, 0, false)
         setProperty("icon2.alpha", healthBarAlpha)
-        setProperty("icon2.visible", hide)
+        setProperty("icon2.visible", not hide)
         setObjectCamera("icon2", 'hud')
         addLuaSprite("icon2", false)
 
@@ -260,24 +260,24 @@ end
 
 -- this code here is a little modification of Unbekannt0 fancy note splashes script (https://gamebanana.com/mods/546439)
 function goodNoteHit(id, direction, noteType, isSustainNote)
-    if not isSustainNote and splashAlpha ~= 0 then
+    if not isSustainNote and getPropertyFromGroup('notes', id, 'rating') == 'sick' then
         local strumMember = direction + 4
-        makeLuaSprite('yeah'..curArrow, 'noteSkins/yeah', getProperty('game.strumLineNotes.members['..strumMember..'].x') - 30, getProperty('game.strumLineNotes.members['..strumMember..'].y') - 35)
+        makeLuaSprite('yeah'..curArrow, 'noteSkins/yeah-'..direction, getProperty('game.strumLineNotes.members['..strumMember..'].x') - 25, getProperty('game.strumLineNotes.members['..strumMember..'].y') - 25)
 
         scaleObject('yeah'..curArrow, 0.3, 0.7, 0.01)
         if direction == 0 then a = 0 c = 'ff00ff' elseif direction == 1 then a = 270 c = '9999ff' elseif direction == 2 then a = 90 c = '00ff00' elseif direction== 3 then a = 180 c = 'ff0000' end
-        local randomAngle = {a - 5, a + 5}
+        local randomAngle = {-5, 5}
         local aRandom = getRandomInt(1, 2)
-        setProperty('yeah'..curArrow..'.angle', a)
+        --setProperty('yeah'..curArrow..'.angle', a)
         setObjectCamera('yeah'..curArrow, 'camHUD')
-        setProperty('yeah'..curArrow..'.alpha', 0.3)
+        setProperty('yeah'..curArrow..'.alpha', splashAlpha / 2)
         setBlendMode('yeah'..curArrow, 'add')
         setProperty('yeah'..curArrow..'.color', getColorFromHex(c))
         setObjectOrder('yeah'..curArrow, 99)
-        doTweenX('yeahXS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.4, 'quartOut');
-        doTweenY('yeahYS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.4, 'quartOut');
-        doTweenAlpha('yeahAplha'..curArrow, 'yeah'..curArrow, 0, 0.4)
-        doTweenAngle('yeahAngle', 'yeah'..curArrow, randomAngle[aRandom], 0.4, 'quartOut')
+        doTweenX('yeahXS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.3, 'quartOut');
+        doTweenY('yeahYS'..curArrow, 'yeah'..curArrow..'.scale', 1, 0.3, 'quartOut');
+        doTweenAlpha('yeahAplha'..curArrow, 'yeah'..curArrow, 0, 0.3)
+        doTweenAngle('yeahAngle', 'yeah'..curArrow, randomAngle[aRandom], 0.3, 'quartOut')
 
         local curBrrow = curArrow - 20
         addLuaSprite('yeah'..curArrow, false)

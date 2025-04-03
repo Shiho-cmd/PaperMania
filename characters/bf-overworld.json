@@ -1,0 +1,47 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [-5, 0],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "walk",
+			"fps": 24,
+			"name": "walk",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-72, -31],
+			"anim": "knock",
+			"fps": 24,
+			"name": "knock knock im sorry im white i had to change the name",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 44,
+			"anim": "run",
+			"loop": true,
+			"name": "walk"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/overworld/bf",
+	"position": [0, 0],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [-160, -260],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

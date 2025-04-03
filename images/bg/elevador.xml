@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="elevador.png">
+<SubTexture name="loop0000" x="0" y="0" width="365" height="386" frameX="-187" frameY="-160" frameWidth="864" frameHeight="648" />
+<SubTexture name="loop0001" x="365" y="0" width="323" height="381" frameX="-219" frameY="-160" frameWidth="864" frameHeight="648" />
+</TextureAtlas>

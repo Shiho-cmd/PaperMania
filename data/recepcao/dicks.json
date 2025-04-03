@@ -1,9 +1,0 @@
-{
-    "spawn": [-400, 330],
-    "camera_offset": [900, 700],
-    
-    "physical_left_cap": [true, -536],
-    "physical_right_cap": [true, 1200],
-    "camera_left_cap": [true, 176],
-    "camera_right_cap": [true, 834]
-}

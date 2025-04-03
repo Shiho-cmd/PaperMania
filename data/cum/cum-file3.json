@@ -1,5 +1,5 @@
 {
-	"player1": "bf-recep",
+	"player1": "bf-overworld",
 	"player2": "bf-pixel-opponent",
 	"notes": [
 		{
@@ -21,7 +21,7 @@
 	"splashSkin": "noteSplashes/noteSplashes-yeahsplashes",
 	"song": "cum",
 	"arrowSkin": "noteSkins/NOTE_assets-yeaharrows",
-	"stage": "recepcao",
+	"stage": "overworld",
 	"needsVoices": true,
 	"format": "psych_v1_convert",
 	"speed": 1.6,

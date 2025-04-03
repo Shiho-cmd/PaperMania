@@ -48,23 +48,13 @@ function onCreate()
     setProperty('vig.alpha', 0.000001)
     addLuaSprite('vig', true)
 
-    makeLuaSprite('album', 'default')
+    makeLuaSprite('album', 'pausemenu/albums/default')
     setObjectCamera('album', 'other')
     scaleObject('album', 0.7, 0.7)
     setProperty('album.angle', 90)
     screenCenter('album', 'y')
     setProperty('album.x', screenWidth)
     addLuaSprite('album', true)
-
-    makeAnimatedLuaSprite("transss", 'transition/transition', 0, 0)
-    addAnimationByPrefix("transss", "loop", "Loop", 24, true)
-    addAnimationByPrefix("transss", "open", "Open", 24, false)
-    addAnimationByPrefix("transss", "close", "Close", 24, false)
-    scaleObject("transss", 1.2, 1.2)
-    setObjectCamera("transss", 'other')
-    screenCenter("transss")
-    setProperty('transss.alpha', 0.000001)
-    addLuaSprite("transss", true)
 end
 
 function onPause()
@@ -94,7 +84,6 @@ function onCustomSubstateCreate(name)
         insertToCustomSubstate('the2')
         insertToCustomSubstate('the3')
         insertToCustomSubstate('the4')
-        insertToCustomSubstate('transss')
 
         playSound('pauseopen', 1)
 
@@ -203,7 +192,7 @@ function onCustomSubstateUpdate(name, elapsed)
             elseif keyJustPressed('accept') and curOpt == 2 then
                 podeClicar = false
                 playSound('scrollMenu', 1)
-                restartSong(false)
+                restartSong(true)
 
             elseif keyJustPressed('accept') and curOpt == 3 then
                 playSound('getOut', 1)
@@ -211,7 +200,7 @@ function onCustomSubstateUpdate(name, elapsed)
             elseif keyJustPressed('accept') and curOpt == 4 then
                 podeClicar = false
                 playSound('scrollMenu', 1)
-                exitSong(false)
+                exitSong(true)
             end
 
             for sayGex = 1, #options do

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="otis.png">
+<SubTexture name="idle0000" x="0" y="0" width="362" height="429" frameX="0" frameY="0" frameWidth="359" frameHeight="419" />
+<SubTexture name="idle0001" x="362" y="0" width="361" height="426" frameX="-8" frameY="-3" frameWidth="359" frameHeight="419" />
+</TextureAtlas>

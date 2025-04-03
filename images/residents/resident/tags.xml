@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-Created with Funkin Packer v0.1.3 DEV https://neeeoo.github.io/funkin-packer/
--->
-<TextureAtlas imagePath="tags.png" width="707" height="208" spritePadding="3" borderPadding="1">
-	<SubTexture name="Chroma0000" x="253" y="1" width="243" height="196" frameX="-11" frameY="-6" frameWidth="269" frameHeight="221"/>
-	<SubTexture name="Fuego0000" x="1" y="1" width="249" height="206" frameX="-11" frameY="-6" frameWidth="276" frameHeight="232"/>
-	<SubTexture name="Naji0000" x="499" y="1" width="207" height="184" frameX="-11" frameY="-6" frameWidth="232" frameHeight="210"/>
-</TextureAtlas>

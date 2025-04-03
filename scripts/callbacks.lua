@@ -37,7 +37,7 @@ function onCreate()
     addLuaSprite("trans", true)
     runTimer("start", 0.5)
 
-    makeAnimatedLuaSprite("butao", 'bg/recepcao/tooltip', 0, 130)
+    makeAnimatedLuaSprite("butao", 'ui/overworld/tooltip', 0, 130)
     addAnimationByPrefix("butao", "loop", chave.keyboard, 69, false)
     scaleObject("butao", 1.5, 1.5)
     setProperty("butao.alpha", 0.0001)
